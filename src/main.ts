@@ -4,7 +4,9 @@ import { ConfigService } from '@nestjs/config';
 import * as helmet from 'helmet';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    abortOnError: false,
+  });
 
   const config = app.get<ConfigService>(ConfigService);
   const env = config.get('env');
@@ -19,6 +21,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   });
   app.use(helmet());
+
   await app.listen(config.get('port'));
 }
 bootstrap();
