@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "penboldt-backend",
   "builds": [
     { "src": "dist/main.js", "use": "@now/node" }
