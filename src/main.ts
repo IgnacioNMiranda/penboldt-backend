@@ -11,7 +11,7 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
   const env = config.get('env');
 
-  const origin = [];
+  const origin = ['https://penboldt-web.vercel.app/'];
   if (env === 'development') {
     origin.push('http://localhost:3000');
   }
