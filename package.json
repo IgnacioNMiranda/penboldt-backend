@@ -4,7 +4,12 @@
   "description": "Backend for Penboldt project, a twitter clone for learning purposes",
   "author": "IgnacioNMiranda",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IgnacioNMiranda/penboldt-backend.git"
+  },
   "scripts": {
+    "preinstall": "rm -rf node_modules",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -12,6 +17,7 @@
     "dev": "doppler run -- nest start --watch",
     "debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "vercel:dev": "doppler run -- vercel dev",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
