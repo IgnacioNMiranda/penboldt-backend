@@ -3,18 +3,19 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import admin from 'firebase-admin';
+import { CryptoUtil } from '../../utils/crypto.util';
 import { User } from '../user/entities/user.entity';
+import { firebaseEncryptedCredential } from '../../config/firebase_credential';
 
 @Injectable()
 export class FirebaseService {
-  constructor(private readonly configService: ConfigService) {
+  constructor(private readonly cryptoUtil: CryptoUtil) {
     if (admin.apps.length === 0) {
+      const credentials = this.cryptoUtil.decipher(firebaseEncryptedCredential);
+      const certCredentials = JSON.parse(credentials);
       admin.initializeApp({
-        credential: admin.credential.cert(
-          this.configService.get('fireBase.credentials'),
-        ),
+        credential: admin.credential.cert(certCredentials),
       });
     }
   }
