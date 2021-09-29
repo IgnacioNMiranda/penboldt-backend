@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { FirebaseService } from './firebase.service';
-import { ConfigModule } from '@nestjs/config';
+import { CryptoUtil } from '../../utils/crypto.util';
 
 @Module({
-  imports: [ConfigModule],
-  providers: [FirebaseService],
+  providers: [FirebaseService, CryptoUtil],
   exports: [FirebaseService],
 })
 export class FirebaseModule {}

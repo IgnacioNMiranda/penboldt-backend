@@ -10,12 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
-
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - uses: actions/checkout@v2
@@ -33,12 +29,6 @@ jobs:
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
-        env:
-          GOOOGLE_APPLICATION_CREDENTIALS_ENCRYPTION_IV: ${{ secrets.GOOOGLE_APPLICATION_CREDENTIALS_ENCRYPTION_IV }}
-          GOOOGLE_APPLICATION_CREDENTIALS_ENCRYPTION_KEY: ${{ secrets.GOOOGLE_APPLICATION_CREDENTIALS_ENCRYPTION_KEY }}
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          PORT: ${{ secrets.PORT }}
         with:
           app-name: 'penboldt-backend'
           slot-name: 'production'
